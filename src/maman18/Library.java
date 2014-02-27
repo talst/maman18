@@ -11,7 +11,7 @@ import maman18.tree.RedBlackTree;
 /**
  * The library database class.
  */
-//@SuppressWarnings("unchecked")
+@SuppressWarnings("unchecked")
 public class Library {
 
     protected RedBlackTree<Integer, Person> members;
