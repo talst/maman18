@@ -172,7 +172,7 @@ public class Library {
     /**
      * Find the members who hold the largest amount of books.
      *
-     * @return Double linked list of the members.
+     * @return An array of Person objects
      */
     public Person[] getMembersWithMostBooks() {
         Person[] membersArray;
