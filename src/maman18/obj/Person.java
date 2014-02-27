@@ -13,7 +13,6 @@ import maman18.tree.RBTreeNode;
 public class Person {
 
     private Integer id;
-    private String firstName;
     private String lastName;
     private DoubleLinkedList<RBTreeNode<String, Book>> ownedBooks;
     private Link<Person> pointerToLinkedList;
@@ -22,12 +21,10 @@ public class Person {
      * Person constructor.
      *
      * @param id        The person ID.
-     * @param firstName Person first name
      * @param lastName  Person last name.
      */
-    public Person(Integer id, String firstName, String lastName) {
+    public Person(Integer id, String lastName) {
         this.id = id;
-        this.firstName = firstName;
         this.lastName = lastName;
         this.ownedBooks = new DoubleLinkedList<RBTreeNode<String, Book>>();
         this.pointerToLinkedList = null;
@@ -40,15 +37,6 @@ public class Person {
      */
     public Integer getId() {
         return id;
-    }
-
-    /**
-     * First name getter.
-     *
-     * @return First name
-     */
-    public String getFirstName() {
-        return firstName;
     }
 
     /**
