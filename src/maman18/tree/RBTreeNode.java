@@ -37,30 +37,12 @@ public class RBTreeNode<K extends Comparable<K>, V> {
     }
 
     /**
-     * Key setter
-     *
-     * @param key New key for the node.
-     */
-    public void setKey(K key) {
-        this.key = key;
-    }
-
-    /**
      * Value object getter.
      *
      * @return the value
      */
     public V getValue() {
         return value;
-    }
-
-    /**
-     * Value setter
-     *
-     * @param value new value for the node.
-     */
-    public void setValue(V value) {
-        this.value = value;
     }
 
     /**
@@ -123,7 +105,7 @@ public class RBTreeNode<K extends Comparable<K>, V> {
      * @return NodeColor of the node./
      */
     public NodeColor getColor() {
-        return color;
+        return this.color;
     }
 
     /**
