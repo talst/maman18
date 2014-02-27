@@ -34,9 +34,9 @@ public class Library {
      * Add member method
      *
      * @param member The member to add.
-     * @return True if added, false if member already exists.
+     * @return 1 if added, -1 if member already exists.
      */
-    public boolean addMemeber(Person member) {
+    public int addMember(Person member) {
         RBTreeNode<Integer, Person> treeNode;
         Link<Person> listLink;
         if (this.members.search(member.getId()).getKey() == null) {
@@ -45,9 +45,9 @@ public class Library {
             listLink = new Link<Person>(member);
             member.setPointerToLinkedList(listLink);
             this.amountOfBooks[0].insert(listLink);
-            return true;
+            return 1;
         } else {
-            return false;
+            return -1;
         }
     }
 
@@ -55,9 +55,9 @@ public class Library {
      * Remove member by ID, will also remove all of owned books from the tree.
      *
      * @param id the member ID
-     * @return True if the member was removed, false if the member did not exist.
+     * @return 1 if the member was removed, -1 if the member did not exist.
      */
-    public boolean removeMember(Integer id) {
+    public int removeMember(Integer id) {
         RBTreeNode<Integer, Person> treeNode;
         treeNode = this.members.search(id);
         Person memberToDelete;
@@ -73,9 +73,9 @@ public class Library {
             }
             this.amountOfBooks[memberToDelete.ownedBookSize()].delete(memberToDelete.getPointerToLinkedList());
             this.members.delete(treeNode);
-            return true;
+            return 1;
         } else {
-            return false;
+            return -1;
         }
     }
 
@@ -85,16 +85,26 @@ public class Library {
      *
      * @param memberId Member ID to add the book to.
      * @param bookId   Book ID to add.
-     * @return True if the book was added, false if the book was not added
-     * (could be because of 3 reasons: Book was already in the book tree and had an owner,
-     * member was not found, and member already have 10 books in his possession).
+     * @return 1 if the book was added or a negative value for 1 of 3 cases.
+     * -1 book already exists in the tree.
+     * -2 member was not found.
+     * -3 member already have 10 books in his possession.
+     *
      */
-    public boolean addBook(Integer memberId, String bookId) {
+    public int addBook(Integer memberId, String bookId) {
         RBTreeNode<String, Book> bookNode = this.books.search(bookId);
         Person member = this.members.search(memberId).getValue();
         Link<RBTreeNode<String, Book>> bookLink;
         Book newBook;
-        if ((bookNode.getKey() == null) && (member != null) && (member.ownedBookSize() < 10)) {
+        if (bookNode.getValue() != null) {
+            return -1;
+        }
+        if (member == null) {
+            return -2;
+        }
+        if (member.ownedBookSize() >= 10) {
+            return -3;
+        } else {
             newBook = new Book(bookId, member);
             bookNode = new RBTreeNode<String, Book>(newBook.getId(), newBook, NodeColor.RED);
             bookLink = new Link<RBTreeNode<String, Book>>(bookNode);
@@ -102,9 +112,7 @@ public class Library {
             this.amountOfBooks[member.ownedBookSize()].delete(member.getPointerToLinkedList());
             member.addBook(bookLink);
             this.amountOfBooks[member.ownedBookSize()].insert(member.getPointerToLinkedList());
-            return true;
-        } else {
-            return false;
+            return 1;
         }
     }
 
@@ -114,20 +122,25 @@ public class Library {
      *
      * @param bookId  Book ID to be removed.
      * @param ownerId ID of the owner.
-     * @return True if was successful, false if the book was not found or the member does not possess the book.
+     * @return 1 if was successful or a negative value for 1 of 2 cases.
+     * -1 book was not found.
+     * -2 owners is not the owner of this book.
      */
-    public boolean removeBook(Integer ownerId, String bookId) {
+    public int removeBook(Integer ownerId, String bookId) {
         RBTreeNode<String, Book> bookNode = this.books.search(bookId);
         Book bookToRemove = bookNode.getValue();
         Link<RBTreeNode<String, Book>> bookLink;
         Person owner;
-        if (bookToRemove != null && bookToRemove.getOwner().getId() == ownerId) {
+        if (bookToRemove == null) {
+            return -1;
+        }
+        if (bookToRemove.getOwner().getId() != ownerId) {
+            return -2;
+        } else {
             owner = bookToRemove.getOwner();
             bookLink = owner.searchBookLink(bookNode);
             bookDeleteHelper(bookLink, owner);
-            return true;
-        } else {
-            return false;
+            return 1;
         }
     }
 
