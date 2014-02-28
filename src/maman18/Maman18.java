@@ -5,8 +5,17 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Main class.
+ */
 public class Maman18 {
 
+    /**
+     * Check if a string is a numeric.
+     *
+     * @param str String to check
+     * @return True if correct false if not.
+     */
     public static boolean isNumeric(String str) {
         try {
             Integer d = Integer.parseInt(str);
@@ -16,6 +25,11 @@ public class Maman18 {
         return true;
     }
 
+    /**
+     * Print members.
+     *
+     * @param membersArr An array of strings to print.
+     */
     public static void printPersons(String[] membersArr) {
         if (membersArr == null) {
             System.out.println("There are no members in the library. \n");
@@ -30,6 +44,11 @@ public class Maman18 {
         }
     }
 
+    /**
+     * Print books
+     *
+     * @param bookArr An array of strings.
+     */
     public static void printBooks(String[] bookArr) {
         if (bookArr == null) {
             System.out.println("Member was not found. \n");
@@ -44,6 +63,13 @@ public class Maman18 {
         }
     }
 
+    /**
+     * Print the result of adding a book.
+     *
+     * @param result Contains the callback result from the library.
+     * @param memId  Member ID.
+     * @param bookID Book ID.
+     */
     public static void printAddBook(int result, Integer memId, String bookID) {
         if (result > 0) {
             System.out.println("The book added successfully to member " + memId + ".\n");
@@ -60,6 +86,13 @@ public class Maman18 {
         }
     }
 
+    /**
+     * Print the result of removing a book
+     *
+     * @param result Contains the callback result from the library.
+     * @param memId  Member ID.
+     * @param bookID Book ID.
+     */
     public static void printRemoveBook(int result, Integer memId, String bookID) {
         if (result > 0) {
             System.out.println("The book removed successfully from member " + memId + ".\n");
@@ -73,12 +106,22 @@ public class Maman18 {
         }
     }
 
+    /**
+     * Print welcome message.
+     */
     private static void welcome() {
         System.out.println("Data Structure, Winter 2014 \n \n"
                 + "MAMAN-18 LIBRARY \n");
     }
 
 
+    /**
+     * Main run function.
+     * Reads the file in argument and parses the commands/queries.
+     *
+     * @param fileName The name of file containing the commands.
+     * @throws FileNotFoundException
+     */
     private static void run(String fileName) throws FileNotFoundException {
 
         Library library1 = new Library();
@@ -164,11 +207,22 @@ public class Maman18 {
         } while (!input.equals("q"));
     }
 
+    /**
+     * Exit function.
+     *
+     * @throws IOException
+     */
     private static void exit() throws IOException {
         System.out.println("Press enter to exit.");
         System.in.read();
     }
 
+    /**
+     * Main function.
+     *
+     * @param args args
+     * @throws IOException
+     */
     public static void main(String[] args) throws IOException {
         welcome();
         run("test1.txt");

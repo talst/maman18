@@ -151,6 +151,8 @@ public class Library {
      *
      * @param memberId Member ID to return the list for.
      * @return String array of the book ids.
+     * If the member have no books will return array of size 0.
+     * If member was not found return null.
      */
     public String[] getOwnedBooksForMember(Integer memberId) {
         Person member = this.members.search(memberId).getValue();
@@ -190,6 +192,8 @@ public class Library {
      * Find the members who hold the largest amount of books.
      *
      * @return String array of the members last name followed by id.
+     * If all members have 0 books will return an array of size 0.
+     * if no members exists will return null.
      */
     public String[] getMembersWithMostBooks() {
         String[] membersArray;
