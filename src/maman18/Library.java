@@ -161,7 +161,7 @@ public class Library {
             bookLink = member.getOwnedBooksHead();
             for (int i = 0; i < bookArray.length; i++) {
                 bookArray[i] = bookLink.getObject().getValue().getId();
-                bookLink.getNext();
+                bookLink = bookLink.getNext();
             }
             return bookArray;
         } else {
@@ -205,7 +205,12 @@ public class Library {
                 return membersArray;
             }
         }
-        return null;
+        if (this.amountOfBooks[0].getSize() > 0) {
+            membersArray = new String[0];
+            return membersArray;
+        } else {
+            return null;
+        }
     }
 
     /**
