@@ -136,7 +136,7 @@ public class Library {
         if (bookToRemove == null) {
             return -1;
         }
-        if (bookToRemove.getOwner().getId() != ownerId) {
+        if (!bookToRemove.getOwner().getId().equals(ownerId)) {
             return -2;
         } else {
             owner = bookToRemove.getOwner();
@@ -194,7 +194,7 @@ public class Library {
     public String[] getMembersWithMostBooks() {
         String[] membersArray;
         Link<Person> listLink;
-        for (int i = 10; i >= 0; i--) {
+        for (int i = 10; i > 0; i--) {
             if (this.amountOfBooks[i].getSize() > 0) {
                 membersArray = new String[this.amountOfBooks[i].getSize()];
                 listLink = this.amountOfBooks[i].search(null).getNext();
