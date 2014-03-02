@@ -14,9 +14,9 @@ import maman18.tree.RedBlackTree;
 @SuppressWarnings("unchecked")
 public class Library {
 
-    protected RedBlackTree<Integer, Person> members;
-    protected RedBlackTree<String, Book> books;
-    protected DoubleLinkedList[] amountOfBooks;
+    private RedBlackTree<Integer, Person> members;
+    private RedBlackTree<String, Book> books;
+    private DoubleLinkedList[] amountOfBooks;
 
     /**
      * Library class constructor.
